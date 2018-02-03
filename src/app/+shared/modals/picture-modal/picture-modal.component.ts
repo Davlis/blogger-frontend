@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FileUploadService} from '../../../+core/services/file-upload.service';
+import {UserService} from '../../../+core/api/user.service';
 import {NgbTabChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
 export const url = process.env.API_URL + '/user/upload';
@@ -26,8 +27,13 @@ export class PictureModalComponent implements OnInit {
 
   public activeTab: number = 1;
 
+  public userPictures: any[] = [];
+
+  public selectedPicture: any;
+
   constructor(public activeModal: NgbActiveModal,
-              public fileUploadService: FileUploadService,) {
+              public fileUploadService: FileUploadService,
+              public userService: UserService,) {
 
     this.fileUploadService.setEndpoint('/user/upload');
     this.uploader = this.fileUploadService.uploader;
@@ -35,6 +41,7 @@ export class PictureModalComponent implements OnInit {
 
   public ngOnInit() {
     this.uploader.onCompleteItem = this.onComplete.bind(this);
+    this.getUserPictures();
   }
 
   public onComplete(...args) {
@@ -79,6 +86,15 @@ export class PictureModalComponent implements OnInit {
     };
 
     this.fileUploadService.upload();
+  }
+
+  public selectPicture(index) {
+    this.selectedPicture = index;
+    this.pictureUrl = this.userPictures[index].uploadUrl;
+  }
+
+  async getUserPictures() {
+    this.userPictures = await this.userService.getUserFiles();
   }
 
   public emitClose(value): void {

@@ -26,4 +26,8 @@ export class UserService {
   public refreshToken(data): Promise<any> {
     return this.dataService.callHandler('post', 'auth/refresh-token', {  data });
   }
+
+  public getUserFiles(): Promise<any> {
+    return this.dataService.callHandler('get', 'user/upload');
+  }
 }

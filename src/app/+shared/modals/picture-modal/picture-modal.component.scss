@@ -18,3 +18,12 @@
     cursor: inherit;
     display: block;
 }
+
+img.miniature {
+    width: 75px;
+    height: 75px;
+}
+
+img.selected {
+    outline: 2px solid blue;
+}

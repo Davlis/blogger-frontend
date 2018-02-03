@@ -30,6 +30,16 @@
               <ngb-tab id="tab-2" title="From your files">
                   <ng-template ngbTabContent>
                       <p>Select picture from your uploaded files.</p>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ng-container *ngFor="let file of userPictures; let i = index;" class="picture-container">
+                            <img class="miniature" 
+                                [class.selected] = "selectedPicture === i" 
+                                [src]="file.uploadUrl" 
+                                (click)="selectPicture(i)"/>
+                          </ng-container>                          
+                        </div>
+                      </div>
                   </ng-template>
               </ngb-tab>
               <ngb-tab id="tab-3" title="From URL">
