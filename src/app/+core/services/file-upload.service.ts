@@ -60,6 +60,10 @@ export class FileUploadService {
     this.uploader.addToQueue(file);
   }
 
+  removeAll(): void {
+    this.uploader.clearQueue();
+  }
+
   remove(file): void {
     this.uploader.removeFromQueue(file);
   }

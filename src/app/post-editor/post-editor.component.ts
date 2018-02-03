@@ -39,7 +39,7 @@ export class PostEditorComponent implements OnInit {
   }
 
   public link(): void {
-    const modalRef = this.openModal('link');
+    const modalRef = this.openModal('link', { size: 'lg' });
     modalRef.componentInstance.onClose.subscribe(text => {
       text && this.insert(`<a href="${text}"</a>`);
     });
@@ -50,9 +50,9 @@ export class PostEditorComponent implements OnInit {
   }
 
   public insertPicture(): void {
-    const modalRef = this.openModal('picture');
+    const modalRef = this.openModal('picture', { size: 'lg' });
     modalRef.componentInstance.onClose.subscribe(event => {
-      console.log(event);
+      event && this.insert(`<img src="${event}" />`);
     });
   }
 
@@ -77,14 +77,14 @@ export class PostEditorComponent implements OnInit {
     el.focus()
   }
 
-  private openModal(type) {
+  private openModal(type, options?) {
 
     if (type === 'link') {
-      return this.modalService.open(LinkModalComponent);
+      return this.modalService.open(LinkModalComponent, options);
     }
 
     if (type === 'picture') {
-      return this.modalService.open(PictureModalComponent);
+      return this.modalService.open(PictureModalComponent, options);
     }
 
   }

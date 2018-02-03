@@ -8,29 +8,34 @@
 
   <div class="nav-tabs-navigation">
       <div class="nav-tabs-wrapper">
-          <ngb-tabset [justify]="'center'">
-              <ngb-tab title="Upload">
+          <ngb-tabset (tabChange)="beforeChange($event)" [justify]="'center'">
+              <ngb-tab id="tab-1" title="Upload">
                   <ng-template ngbTabContent>
-                    <input type="file" ng2FileSelect [uploader]="uploader" (change)="uploadPicture($event)" />
-                  </ng-template>
-
-                <div>
-                    Queue progress:
-                    <div class="progress" style="">
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                  <label class="btn btn-default btn-file" for="my-file-selector">
+                      <input id="my-file-selector" type="file" style="display:none;"
+                            ng2FileSelect
+                            (change)="uploadPicture($event)"
+                            [uploader]="uploader">
+                      Browse
+                  </label>
+                  <span class='label label-info' id="upload-file-info"></span>
+                    <div>
+                        Queue progress:
+                        <div class="progress" style="">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
+                        </div>
                     </div>
-                </div>
-                  
-              </ngb-tab>
-              <ngb-tab title="From your files">
-                  <ng-template ngbTabContent>
-                      <p>Here is your profile.</p>
                   </ng-template>
               </ngb-tab>
-              <ngb-tab title="From URL">
+              <ngb-tab id="tab-2" title="From your files">
+                  <ng-template ngbTabContent>
+                      <p>Select picture from your uploaded files.</p>
+                  </ng-template>
+              </ngb-tab>
+              <ngb-tab id="tab-3" title="From URL">
                   <ng-template ngbTabContent>
                     <div class="form-group">
-                      <input class="form-control" type="text" placeholder="Paste your link here"  [(ngModel)]="pictureUrl" /> 
+                      <input class="form-control" type="text" placeholder="Paste picture link here"  [(ngModel)]="pictureUrl" /> 
                     </div>
                   </ng-template>
               </ngb-tab>
@@ -40,12 +45,17 @@
 
 </div>
 <div class="modal-footer">
-  <div class="left-side">
-    <button type="button" class="btn btn-default btn-link" (click)="emitClose(); activeModal.close('Close click')">Never mind</button>
-  </div>
-  <div class="divider"></div>
-  <div class="right-side">
-    <button type="button" class="btn btn-danger btn-link" 
-            (click)="emitClose(pictureUrl); activeModal.close('Close click')">OK</button>
-  </div>
+  <ng-container *ngIf="activeTab !== 1">
+    <div class="left-side">
+      <button type="button" class="btn btn-default btn-link" (click)="emitClose(); activeModal.close('Close click')">Never mind</button>
+    </div>
+    <div class="divider"></div>
+    <div class="right-side">
+      <button type="button" class="btn btn-danger btn-link" 
+              (click)="emitClose(pictureUrl); activeModal.close('Close click')">OK</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 1">
+      <button type="button" class="btn btn-default btn-link" (click)="emitClose(); activeModal.close('Close click')">Never mind</button>
+  </ng-container>
 </div>
