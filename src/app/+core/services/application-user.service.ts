@@ -57,7 +57,7 @@ export class ApplicationUserService {
 
   async register(registerData: any) {
 
-    const result = await this.userService.login(registerData)
+    const result = await this.userService.register(registerData)
 
     this.setUser(result.user)
     this.setTokens(result.token)

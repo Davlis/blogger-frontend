@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import {
   LinkModalComponent,
@@ -17,6 +18,7 @@ import {
     FormsModule,
     NgbModule,
     RouterModule,
+    FileUploadModule,
   ],
   entryComponents: [
     LinkModalComponent,
