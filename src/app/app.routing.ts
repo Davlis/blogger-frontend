@@ -13,30 +13,73 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BlogComponent } from './blog/blog.component';
 import { PostEditorComponent } from './post-editor/post-editor.component';
 
+import { AuthGuard } from './+core/guards/auth.guard';
+import { LoginGuard } from './+core/guards/login.guard';
 
 import { DevComponent } from './dev/dev.component';
 
 const routes: Routes = [
-  { path: 'home',             component: HomeComponent },
-  { path: 'user-profile',     component: ProfileComponent },
-  { path: 'signup',           component: SignupComponent },
-  { path: 'login',            component: LoginComponent },
-  { path: 'forgot-password',  component: ForgotPasswordComponent },
-  { path: 'landing',          component: LandingComponent },
-  { path: 'blog',             component: BlogComponent },
-  { path: 'nucleoicons',      component: NucleoiconsComponent },
-  { path: 'dev',              component: DevComponent },
-  { path: 'post-edit',        component: PostEditorComponent },
-  { path: '', redirectTo: 'post-edit', pathMatch: 'full' }
+  { 
+    path: 'home',
+    component: HomeComponent,
+  },
+  { 
+    path: 'user-profile',
+    component: ProfileComponent,
+  },
+  { 
+    path: 'signup',
+    canActivate: [LoginGuard],
+    component: SignupComponent,
+  },
+  { 
+    path: 'login',
+    canActivate: [LoginGuard],
+    component: LoginComponent,
+  },
+  { 
+    path: 'forgot-password', 
+    component: ForgotPasswordComponent,
+  },
+  { 
+    path: 'landing',
+    component: LandingComponent,
+  },
+  { 
+    path: 'blog',
+    component: BlogComponent,
+  },
+  { 
+    path: 'nucleoicons',
+    component: NucleoiconsComponent,
+  },
+  { 
+    path: 'dev',
+    component: DevComponent,
+  },
+  { 
+    path: 'post-edit',
+    canActivate: [AuthGuard], 
+    component: PostEditorComponent,
+  },
+  { 
+    path: '',
+    redirectTo: 'post-edit',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports: [
+  ],
+  providers: [
+    AuthGuard,
+    LoginGuard,
   ],
 })
 export class AppRoutingModule { }

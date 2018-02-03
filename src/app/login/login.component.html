@@ -18,13 +18,14 @@
                                 </a>
                             </div>
                             <form class="register-form">
+
                                 <label>Email</label>
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
 
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
 
-                                <button class="btn btn-danger btn-block btn-round" (click)="goToHome()">Login</button>
+                                <button class="btn btn-danger btn-block btn-round" (click)="login()">Login</button>
                             </form>
                             <div class="forgot">
                                 <a [routerLink]="['/forgot-password']" class="btn btn-link btn-danger">Forgot password?</a>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="footer register-footer text-center">
-                    <h6>&copy;{{test | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
+                    <h6>&copy;{{date | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
                 </div>
             </div>
     </div>

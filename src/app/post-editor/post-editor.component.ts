@@ -24,6 +24,7 @@ export class PostEditorComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log('XDD');
   }
 
   public bold(): void {

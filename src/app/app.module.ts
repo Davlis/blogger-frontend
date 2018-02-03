@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -17,9 +19,7 @@ import { BlogComponent } from './blog/blog.component';
 import { HomeModule } from './home/home.module';
 import { PostEditorComponent } from './post-editor/post-editor.component';
 import { ModalModule } from './+shared/modals/modal.module';
-
 import { CoreModule } from './+core/core.module';
-
 
 import { DevModule } from './dev/dev.module'
 
@@ -29,6 +29,7 @@ import { DevModule } from './dev/dev.module'
     NgbModule.forRoot(),
     FormsModule,
     RouterModule,
+    HttpModule,
     AppRoutingModule,
     CoreModule,
     HomeModule,
@@ -47,7 +48,8 @@ import { DevModule } from './dev/dev.module'
     BlogComponent,
     PostEditorComponent,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

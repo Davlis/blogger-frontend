@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
+import { LocalStorageService, LocalStorage } from 'ngx-webstorage';
 import { Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable';
 import * as jwt from 'jsonwebtoken';
@@ -8,10 +8,13 @@ import { DataService } from '../api/data.service';
 @Injectable()
 export class UserService {
 
-  public isLoggedIn: boolean = false;
-
+  @LocalStorage()
   public user: any;
+
+  @LocalStorage()
   public access: any;
+
+  @LocalStorage()
   public refresh: any;
 
   public userObservable: any;
@@ -19,10 +22,7 @@ export class UserService {
 
   constructor(private dataService: DataService,
               private localStorage: LocalStorageService,
-              private route: ActivatedRoute,
               private router: Router,) {
-
-    this.init();
     
     this.userObservable = new Observable(observer => {
       this.userObserver = observer;
@@ -30,10 +30,6 @@ export class UserService {
   }
 
   async init() {
-
-    console.log('init');
-
-    this.retrieveBasis();
 
     let now = new Date();
 
@@ -52,23 +48,20 @@ export class UserService {
     }
   }
 
-  retrieveBasis() {
-    this.user = this.localStorage.retrieve('user');
-    this.access = this.localStorage.retrieve('access');
-    this.refresh = this.localStorage.retrieve('refresh');
-  }
-
   isAuthenticated() {
     return (this.user && this.access && new Date(this.access.expDate) > new Date());
   }
 
-  signUp(signUpData: any) {
-    return this.dataService.callHandler('post', 'signup', { data: signUpData });
+  async register(registerData: any) {
+    const result = await this.dataService.callHandler('post', 'auth/register', { data: registerData });
+
+    this.setUser(result.user)
+    this.setTokens(result.token)
   }
 
   async login(loginData: any) {
 
-    const result = await this.dataService.callHandler('post', 'login', { data: loginData });
+    const result = await this.dataService.callHandler('post', 'auth/login', { data: loginData });
     const [decodedAccess, decodedRefresh] = this.decodeTokens(result.token)
 
     if (decodedAccess.id === decodedRefresh.id
@@ -77,11 +70,9 @@ export class UserService {
       this.setUser(result.user)
       this.setTokens(result.token)
     } else {
-      this.isLoggedIn = false;
       throw { message: 'Invalid user' };
     }
 
-    this.isLoggedIn = true;
     return this.user;
   }
 
@@ -168,7 +159,6 @@ export class UserService {
       this.user = null;
       this.access = null;
       this.refresh = null;
-      this.isLoggedIn = false;
       this.localStorage.clear('user');
       this.localStorage.clear('access');
       this.localStorage.clear('refresh');

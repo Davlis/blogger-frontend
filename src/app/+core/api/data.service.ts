@@ -9,7 +9,7 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { AuthService } from '../services/auth.service';
 
 export const env = {
-  api_url: 'http://localhost:3000/',
+  api_url: 'http://localhost:3000',
 }
 
 export const methodNames = [
