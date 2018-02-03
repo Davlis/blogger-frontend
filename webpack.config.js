@@ -469,7 +469,7 @@ module.exports = {
         "context": "src",
         "to": "",
         "from": {
-          "glob": "src/assets/**/*",
+          "glob": "assets/**/*",
           "dot": true
         }
       },

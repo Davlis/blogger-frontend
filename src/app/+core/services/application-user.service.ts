@@ -65,7 +65,7 @@ export class ApplicationUserService {
 
   async login(loginData: any) {
 
-    const result = await this.userService.register(loginData);
+    const result = await this.userService.login(loginData);
     const [decodedAccess, decodedRefresh] = this.decodeTokens(result.token)
 
     if (decodedAccess.id === decodedRefresh.id
