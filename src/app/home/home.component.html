@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="main">
+    <div class="section">
+      <div class="container">
+        <h2>Welcome back, {{user.firstName}}</h2>
+        <div class="blog-list">
+          <div *ngFor="let blog of blogs" class="blog" (click)="gotoBlog()">
+            <h3>
+              {{blog.title}}
+            </h3>
+            <div class="blog-picture">
+              <img [src]="blog.photoUrl"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

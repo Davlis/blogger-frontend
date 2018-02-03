@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title text-center">Link input</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input class="form-control" type="text" placeholder="Paste your link here"  [(ngModel)]="link" /> 
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="left-side">
+    <button type="button" class="btn btn-default btn-link" (click)="emitClose(); activeModal.close('Close click')">Never mind</button>
+  </div>
+  <div class="divider"></div>
+  <div class="right-side">
+    <button type="button" class="btn btn-danger btn-link" 
+            (click)="emitClose(link); activeModal.close('Close click')">OK</button>
+  </div>
+</div>

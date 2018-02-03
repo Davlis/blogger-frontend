@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <div class="main">
+    <div class="section">
+      <div class="container">
+        <form>
+            <div class="header">
+              <div class="post-title">
+                <input class="form-control" type="text" placeholder="Post title" />
+              </div>
+              <div class="options">
+                <div class="button-container">
+                  <button class="btn btn-outline-danger btn-round btn-sm" type="button">Publish</button>
+                  <button class="btn btn-outline-success btn-sm" type="button">Save</button>
+                  <button class="btn btn-outline-success btn-sm" type="button">View mode</button>
+                  <button class="btn btn-outline-success btn-sm" type="button">Close</button>
+                </div>
+              </div>
+            </div>
+            <div class="editor">
+              <div class="editor-header">
+                <div class="button-container">
+                  <button type="button" (click)="bold()">B</button>
+                  <button type="button" (click)="cursive()"><i>I</i></button>
+                  <button type="button" (click)="strike()"><s>ABC</s></button>
+                  <button type="button" (click)="link()">Link</button>
+                  <button type="button" (click)="quote()">Quote</button>
+                  <button type="button" (click)="insertPicture()">Picture insert</button> <!-- Add modal here -->
+                </div>
+              </div>
+              <div class="editor-area">
+                <div class="editor-holder">
+                  <textarea 
+                           #textarea 
+                           (click)="getCaretPos(textarea)" 
+                           (keyup)="getCaretPos(textarea)" 
+                           class="htmlBox" 
+                           cols="150" 
+                           rows="50" 
+                           wrap="soft"></textarea>
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
