@@ -11,7 +11,9 @@ import { LandingComponent } from './landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { BlogComponent } from './blog/blog.component';
+
 import { PostEditorComponent } from './post-editor/post-editor.component';
+import { PostViewComponent } from './post-view/post-view.component';
 
 import { AuthGuard } from './+core/guards/auth.guard';
 import { LoginGuard } from './+core/guards/login.guard';
@@ -62,9 +64,13 @@ const routes: Routes = [
     canActivate: [AuthGuard], 
     component: PostEditorComponent,
   },
+  {
+    path: 'post-view',
+    component: PostViewComponent,
+  },
   { 
     path: '',
-    redirectTo: 'post-edit',
+    redirectTo: 'post-view',
     pathMatch: 'full',
   },
 ];

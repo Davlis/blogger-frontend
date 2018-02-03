@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from 'ngx-webstorage';
 
 import {
   LinkModalComponent,
@@ -21,7 +23,9 @@ export class PostEditorComponent implements OnInit {
   public selectionStart: number = 0;
   public selectionEnd: number = 0;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              public router: Router,
+              public localStorage: LocalStorageService,) { }
 
   ngOnInit() {
   }
@@ -41,7 +45,7 @@ export class PostEditorComponent implements OnInit {
   public link(): void {
     const modalRef = this.openModal('link', { size: 'lg' });
     modalRef.componentInstance.onClose.subscribe(text => {
-      text && this.insert(`<a href="${text}"</a>`);
+      text && this.insert(`<a href="${text}"></a>`);
     });
   }
 
@@ -54,6 +58,13 @@ export class PostEditorComponent implements OnInit {
     modalRef.componentInstance.onClose.subscribe(event => {
       event && this.insert(`<img src="${event}" />`);
     });
+  }
+
+  public gotoViewMode(): void {
+
+    this.localStorage.store('viewHTML', this.textarea.nativeElement.value);
+
+    open('post-view', '_blank');
   }
 
   public getCaretPos(oField) {

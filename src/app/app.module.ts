@@ -17,7 +17,10 @@ import { NavbarComponent } from './+shared/navbar/navbar.component';
 import { FooterComponent } from './+shared/footer/footer.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeModule } from './home/home.module';
+
 import { PostEditorComponent } from './post-editor/post-editor.component';
+import { PostViewComponent } from './post-view/post-view.component';
+
 import { ModalModule } from './+shared/modals/modal.module';
 import { CoreModule } from './+core/core.module';
 
@@ -47,6 +50,7 @@ import { DevModule } from './dev/dev.module'
     ForgotPasswordComponent,
     BlogComponent,
     PostEditorComponent,
+    PostViewComponent,
   ],
   providers: [
   ],
