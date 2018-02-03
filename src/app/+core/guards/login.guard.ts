@@ -1,5 +1,5 @@
 import { Injectable }  from '@angular/core';
-import { CanActivate, Router, ActivatedRoute } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { ApplicationUserService } from '../services/application-user.service';
 
 @Injectable()
@@ -7,7 +7,6 @@ export class LoginGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private applicationUserService: ApplicationUserService) {
   }
 
