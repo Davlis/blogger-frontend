@@ -3,10 +3,12 @@ import { LocalStorageService, LocalStorage } from 'ngx-webstorage';
 import { Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable';
 import * as jwt from 'jsonwebtoken';
-import { DataService } from '../api/data.service';
+
+import { UserService } from '../api/user.service';
+
 
 @Injectable()
-export class UserService {
+export class ApplicationUserService {
 
   @LocalStorage()
   public user: any;
@@ -20,9 +22,10 @@ export class UserService {
   public userObservable: any;
   public userObserver: any;
 
-  constructor(private dataService: DataService,
-              private localStorage: LocalStorageService,
-              private router: Router,) {
+  constructor(
+    private localStorage: LocalStorageService,
+    private router: Router,
+    public userService: UserService,) {
     
     this.userObservable = new Observable(observer => {
       this.userObserver = observer;
@@ -53,7 +56,8 @@ export class UserService {
   }
 
   async register(registerData: any) {
-    const result = await this.dataService.callHandler('post', 'auth/register', { data: registerData });
+
+    const result = await this.userService.login(registerData)
 
     this.setUser(result.user)
     this.setTokens(result.token)
@@ -61,7 +65,7 @@ export class UserService {
 
   async login(loginData: any) {
 
-    const result = await this.dataService.callHandler('post', 'auth/login', { data: loginData });
+    const result = await this.userService.register(loginData);
     const [decodedAccess, decodedRefresh] = this.decodeTokens(result.token)
 
     if (decodedAccess.id === decodedRefresh.id
@@ -74,10 +78,6 @@ export class UserService {
     }
 
     return this.user;
-  }
-
-  isUserStructure(user) {
-    return (user && typeof user === 'object' && user.id && user.email && user.role && user.firstName && user.lastName);
   }
 
   setUser(user) {
@@ -112,20 +112,18 @@ export class UserService {
   }
 
   async refreshTokens() {
-    const result = await this.dataService.callHandler('post', 'refresh-token', { data:
-      { refreshToken: this.refresh.token }})
+    const result = await this.userService.refreshToken({ refreshToken: this.refresh.token });
+    const [decodedAccess, decodedRefresh] = this.decodeTokens(result)
 
-      const [decodedAccess, decodedRefresh] = this.decodeTokens(result)
+    if (decodedAccess.id === decodedRefresh.id 
+        && decodedRefresh.id === this.user.id) {
 
-      if (decodedAccess.id === decodedRefresh.id 
-          && decodedRefresh.id === this.user.id) {
+      this.setTokens(result)
 
-        this.setTokens(result)
-
-        return;
-      } else {
-        return { message: 'Wrong user data' };
-      }
+      return;
+    } else {
+      return { message: 'Wrong user data' };
+    }
   }
 
   private propagateChanges(user) {
@@ -134,21 +132,13 @@ export class UserService {
     this.localStorage.store('user', user);
   }
 
-  async resetPassword(resetData: any) {
-    return (await this.dataService.callHandler('put', 'reset-password', { data: resetData }));
-  }
-
-  async setPassword(setData: any) {
-    return (await this.dataService.callHandler('put', 'set-password', { data: setData }));
-  }
-
   async editUser(data: any) {
-    const result = await this.dataService.callHandler('patch', 'profile', { data });
-    this.propagateChanges(result.user);
-    return result.user;
+    //const result = await this.dataService.callHandler('patch', 'profile', { data });
+    //this.propagateChanges(result.user);
+    //return result.user;
   }
 
-  setProfilePhoto(photoUrl: string): void {
+  public setProfilePhoto(photoUrl: string): void {
     const user = Object.assign({}, this.user);
     user.photoUrl = photoUrl;
     this.propagateChanges(user);

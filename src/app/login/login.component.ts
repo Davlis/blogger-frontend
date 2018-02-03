@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../+core/services/user.service';
+import { ApplicationUserService } from '../+core/services/application-user.service';
 
 @Component({
     selector: 'app-login',
@@ -15,13 +15,13 @@ export class LoginComponent implements OnInit {
     public password: string = '';
 
     constructor(public router: Router,
-                public userService: UserService,) { }
+                public appUserService: ApplicationUserService,) { }
 
     ngOnInit() {}
 
     async login() {
         try {
-            await this.userService.login({ email: this.email, password: this.password })
+            await this.appUserService.login({ email: this.email, password: this.password })
             this.goToHome();
         } catch(err) {
             console.log(err);

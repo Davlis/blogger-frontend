@@ -31,10 +31,16 @@ export class DataService {
   constructor(private http: Http, private auth: AuthService) {
   }
 
-  callHandler(method: string, endpoint: string, options?: any): Promise<any> {
+  public callHandler(method: string, endpoint: string, options?: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
 
       let params: any = {};
+
+      if (!method) {
+        return Promise.reject('First param cannot be undefined')
+      }
+
+      method = method.toLowerCase();
 
       if (methodNames.indexOf(method) === -1) {
         return Promise.reject('Wrong method name');

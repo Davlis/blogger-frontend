@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../+core/services/user.service';
+import { ApplicationUserService } from '../+core/services/application-user.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,14 +17,14 @@ export class SignupComponent implements OnInit {
   public lastName: string;
 
   constructor(public router: Router,
-              public userService: UserService,) { }
+              public appUserService: ApplicationUserService,) { }
 
   ngOnInit() {}
 
   async register() {
     try {
 
-      await this.userService.register(Object.assign({}, {
+      await this.appUserService.register(Object.assign({}, {
         email: this.email,
         password: this.password,
         firstName: this.firstName,
