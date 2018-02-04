@@ -39,9 +39,9 @@ export class PostEditorComponent implements OnInit {
        try {
 
          if (params['postId'] !== 'new') {
-           const result = await this.postService.getPost(params['blogId'], params['postId'])  
+           const result = await this.getPost(params['blogId'], params['postId']);
          } else {
-           const checkForBlog = await this.blogService.getBlog(params['blogId']);
+           const checkForBlog = await this.getBlog(params['blogId']);
          }
 
          
@@ -53,11 +53,11 @@ export class PostEditorComponent implements OnInit {
   }
 
   async getBlog(id) {
-
+    return await this.blogService.getBlog(id);
   }
 
-  async getPost(id) {
-
+  async getPost(blogId, postId) {
+    return await this.postService.getPost(blogId, postId);
   }
 
   public bold(): void {
