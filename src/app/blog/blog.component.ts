@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {BlogService} from '../+core/api/blog.service';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
 
 @Component({
   selector: 'app-blog',
@@ -7,30 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  test : Date = new Date();
 
   public user: any = {
     firstName: 'Dawid',
     lastName: 'Liszka',
   };
 
-  public blog: any = {
-    id: '1',
-    title: 'My epic journey',
-    tags: ['epic', 'journey'],
-    photoUrl: 'assets/img/blog_1.jpg',
-    owner: {
-      firstName: 'Dawid',
-      lastName: 'Liszka',
+  public blog: any;
+  public backgroundImg: any;
+
+  constructor(public router: Router,
+              public route: ActivatedRoute,
+              public blogService: BlogService,
+              private sanitizer: DomSanitizer,) { }
+
+  ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.getBlog(params['id'])
+    });
+  }
+
+  async getBlog(id) {
+    try {
+      this.blog = await this.blogService.getBlog(id);
+      const photoUrl = this.blog.photoUrl ? this.blog.photoUrl : 'assets/img/blog_1.jpg';
+      this.backgroundImg = this.sanitizer.bypassSecurityTrustStyle(`url(${photoUrl})`);
+    } catch(err) {
+      console.error(err);
     }
-  };
-
-  constructor(public router: Router) { }
-
-  ngOnInit() {}
-
-  public goToHome() {
-    // temp
-    this.router.navigate(['/home']);
   }
 }

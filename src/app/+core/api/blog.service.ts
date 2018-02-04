@@ -16,7 +16,7 @@ export class BlogService {
   }
 
   public getBlog(id): Promise<any> {
-    return this.dataService.callHandler('get', `blogs${id}`);
+    return this.dataService.callHandler('get', `blogs/${id}`);
   }
 
   public updateBlog(id, data): Promise<any> {

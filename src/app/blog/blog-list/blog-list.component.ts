@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {BlogService} from '../../+core/api/blog.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -8,37 +9,24 @@ import { Router } from '@angular/router';
 })
 export class BlogListComponent implements OnInit {
 
-  public user: any = {
-    firstName: 'Dawid',
-    lastName: 'Liszka',
-  };
 
-  public blogs: any[] = [
-    {
-      id: '1',
-      title: 'My epic journey',
-      tags: ['epic', 'journey'],
-      photoUrl: 'assets/img/blog_1.jpg',
-      owner: {
-        firstName: 'Dawid',
-        lastName: 'Liszka',
-      }
-    },
-    {
-      id: '2',
-      title: 'Life is too short',
-      tags: ['life', 'is', 'too', 'short'],
-      photoUrl: 'assets/img/blog_1.jpg',
-      owner: {
-        firstName: 'Dawid',
-        lastName: 'Liszka',
-      }
-    },
-  ]
+  public blogs: any[] = []
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,
+              public blogService: BlogService,) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBlogs();
+  }
+
+  async getBlogs() {
+    try {
+      const result = await this.blogService.getBlogs();
+      this.blogs = result.map(r => r.blog);
+    } catch(err) {
+
+    }
+  }
 
   public goToHome() {
     this.router.navigate(['/home']);

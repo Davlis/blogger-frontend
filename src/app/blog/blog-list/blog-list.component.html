@@ -8,7 +8,7 @@
               {{blog.title}}
             </h3>
             <div class="blog-picture">
-              <img [src]="blog.photoUrl"/>
+              <img [src]="blog.photoUrl ? blog.photoUrl : 'assets/img/blog_1.jpg'"/>
             </div>
           </div>
         </div>

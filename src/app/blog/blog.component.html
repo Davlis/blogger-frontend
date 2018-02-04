@@ -1,5 +1,6 @@
-<div class="wrapper">
-  <div class="page-header section-dark" style="background-image: url('assets/img/blog_1.jpg')">
+<div class="wrapper" *ngIf="blog">
+  <div class="page-header section-dark" 
+      [style.background-image]="backgroundImg">
       <div class="filter"></div>
       <div class="content-center">
           <div class="container">
@@ -16,7 +17,7 @@
                   </div>
               </div>
 
-              <h2 class="presentation-subtitle text-center">Create your own blog using blogger</h2>
+              <h2 class="presentation-subtitle text-center">{{blog.subtitle}}</h2>
           </div>
       </div>
       <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>

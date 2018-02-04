@@ -16,10 +16,10 @@ export class PostService {
   }
 
   public getPost(blogId, postId): Promise<any> {
-    return this.dataService.callHandler('get', `blogs/${blogId}/posts${postId}`);
+    return this.dataService.callHandler('get', `blogs/${blogId}/posts/${postId}`);
   }
 
   public updatePost(blogId, postId, data): Promise<any> {
-    return this.dataService.callHandler('put', `blogs/${blogId}/posts${postId}`, data);
+    return this.dataService.callHandler('put', `blogs/${blogId}/posts/${postId}`, data);
   }
 }
