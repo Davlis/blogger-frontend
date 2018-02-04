@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {FileUploadService} from '../../+core/services/file-upload.service';
 import {BlogService} from '../../+core/api/blog.service';
 import {
@@ -31,7 +31,11 @@ export class BlogCreateComponent implements OnInit {
 
   public photoUrl: string;
 
+  public editMode: boolean = false;
+  public fetchedBlog: any;
+
   constructor(public router: Router,
+              public route: ActivatedRoute,
               public fileUploadService: FileUploadService,
               public blogService: BlogService,
               public fb: FormBuilder,) {
@@ -43,6 +47,34 @@ export class BlogCreateComponent implements OnInit {
   ngOnInit() {
     this.uploader.onCompleteItem = this.onComplete.bind(this);
     this.formInit();
+
+    this.route.params.subscribe(async params => {
+      if (params['id'] !== 'new') {
+
+       this.fetchedBlog = await this.getBlog(params['id'])
+
+       this.editMode = true;
+
+       this.formGroup.get('title').setValue(this.fetchedBlog.title);
+       this.formGroup.get('subtitle').setValue(this.fetchedBlog.subtitle);
+       this.formGroup.get('photoUrl').setValue(this.fetchedBlog.photoUrl);
+       this.photoUrl = this.fetchedBlog.photoUrl;
+
+       if (this.photoUrl) {
+         this.uploadedFlag = true;
+         document.getElementById('upload-file-info').innerHTML = this.photoUrl;
+       }
+
+      }
+    });
+  }
+
+  async getBlog(id) {
+    try {
+      return await this.blogService.getBlog(id);
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   public formInit() {
@@ -55,6 +87,23 @@ export class BlogCreateComponent implements OnInit {
 
   public goHome() {
     this.router.navigate(['/home']);
+  }
+
+  async updateBlog() {
+    if (!this.formGroup.valid) {
+      return;
+    }
+
+    try {
+      const result = await this.blogService.updateBlog(this.fetchedBlog.id, {
+        data: this.formGroup.value,
+      });
+
+      this.router.navigate(['/blog', result.id]);
+
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   async createBlog() {

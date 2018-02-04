@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isNavbarRoutes() {
-    const titlee = this.location.prepareExternalUrl(this.location.path()).replace('/', '');
+    const titlee = this.location.prepareExternalUrl(this.location.path()).split('/')[1]
     return NAVBAR_ROUTES.includes(titlee)
   }
 

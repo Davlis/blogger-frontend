@@ -22,4 +22,8 @@ export class BlogService {
   public updateBlog(id, data): Promise<any> {
     return this.dataService.callHandler('put', `blogs/${id}`, data);
   }
+
+  public deleteBlog(id): Promise<any> {
+    return this.dataService.callHandler('delete', `blogs/${id}`);
+  }
 }

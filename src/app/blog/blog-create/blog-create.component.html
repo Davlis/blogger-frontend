@@ -2,7 +2,7 @@
   <div class="main">
     <div class="section">
       <div class="container">
-        <form class="blog-form" [formGroup]="formGroup" (ngSubmit)="createBlog()">
+        <form class="blog-form" [formGroup]="formGroup">
           <div class="form-group">
             <input formControlName="title" class="form-control" type="text" placeholder="Title" />
           </div>
@@ -35,7 +35,8 @@
             </div>
             <div class="divider"></div>
             <div class="right-side">
-              <button type="submit" class="btn btn-success btn-round btn-lg" [class.disabled]="!formGroup.valid">Submit</button>
+              <button *ngIf="!editMode" type="submit" class="btn btn-success btn-round btn-lg" [class.disabled]="!formGroup.valid" (click)="createBlog()">Submit</button>
+              <button *ngIf="editMode" type="submit" class="btn btn-success btn-round btn-lg" [class.disabled]="!formGroup.valid" (click)="updateBlog()">Save changes</button>
             </div>
             </div>
         </form>

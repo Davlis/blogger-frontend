@@ -39,4 +39,8 @@ export class BlogComponent implements OnInit {
       console.error(err);
     }
   }
+
+  public addPost() {
+    this.router.navigate(['post-edit', this.blog.id, 'new']);
+  }
 }

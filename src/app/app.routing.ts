@@ -61,7 +61,7 @@ const routes: Routes = [
     component: BlogListComponent,
   },
   {
-    path: 'blog-create',
+    path: 'blog-create/:id',
     canActivate: [AuthGuard],
     component: BlogCreateComponent,
   },
@@ -74,7 +74,7 @@ const routes: Routes = [
     component: DevComponent,
   },
   { 
-    path: 'post-edit',
+    path: 'post-edit/:blogId/:postId',
     canActivate: [AuthGuard], 
     component: PostEditorComponent,
   },

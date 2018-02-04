@@ -6,18 +6,18 @@
           <input #searchBox class="form-control" type="text" placeholder="Search" (keyup)="search(searchBox.value)" />
         </div>
         <div class="blog-list">
-          <div *ngFor="let blog of blogs" class="blog" (click)="gotoBlog(blog)">
+          <div *ngFor="let blog of blogs" class="blog">
             <div class="blog-header">
               <span class="blog-title">
                 <h3>{{blog.title}}</h3>
               </span>
               <div class="blog-options">
-                <button type="button" class="btn btn-primary btn-round btn-sm">Edit</button>
-                <button type="button" class="btn btn-primary btn-round btn-sm">Add author</button>
-                <button type="button" class="btn btn-danger btn-round btn-sm">Delete</button>
+                <button type="button" class="btn btn-primary btn-round btn-sm" (click)="edit(blog)">Edit</button>
+                <button type="button" class="btn btn-primary btn-round btn-sm" (click)="addAuthor(blog)">Add author</button>
+                <button type="button" class="btn btn-danger btn-round btn-sm" (click)="delete(blog)">Delete</button>
               </div>
             </div>
-            <div class="blog-picture">
+            <div class="blog-picture" (click)="gotoBlog(blog)">
               <img [src]="blog.photoUrl ? blog.photoUrl : 'assets/img/blog_1.jpg'"/>
             </div>
           </div>

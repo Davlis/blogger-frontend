@@ -20,31 +20,8 @@ export class HomeComponent implements OnInit {
     lastName: 'Liszka',
   };
 
-  public blogs: any[] = [
-    {
-      id: '1',
-      title: 'My epic journey',
-      tags: ['epic', 'journey'],
-      photoUrl: 'assets/img/blog_1.jpg',
-      owner: {
-        firstName: 'Dawid',
-        lastName: 'Liszka',
-      }
-    },
-    {
-      id: '2',
-      title: 'Life is too short',
-      tags: ['life', 'is', 'too', 'short'],
-      photoUrl: 'assets/img/blog_1.jpg',
-      owner: {
-        firstName: 'Dawid',
-        lastName: 'Liszka',
-      }
-    },
-  ]
-
   public gotoBlogCreate(): void {
-    this.router.navigate(['/blog-create']); 
+    this.router.navigate(['/blog-create', 'new']); 
   }
 
   public gotoBlogList(): void {

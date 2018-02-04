@@ -58,8 +58,8 @@ export class AppComponent implements OnInit {
 
   navbarManip(navbar) {
     const number = window.scrollY;
-
-    const titlee = this.location.prepareExternalUrl(this.location.path()).slice(1).replace('/', '')
+    
+    const titlee = this.location.prepareExternalUrl(this.location.path()).split('/')[1]
 
     if (!NAVBAR_ROUTES.includes(titlee)) {
       if (number > 150 || window.pageYOffset > 150) {

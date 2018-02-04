@@ -32,6 +32,24 @@ export class BlogListComponent implements OnInit {
     }
   }
 
+  public edit(blog): void {
+    this.router.navigate(['/blog-create', blog.id])
+  }
+
+  public addAuthor(blog): void {
+    console.log('add author');
+  }
+
+  async delete(blog) {
+    try {
+
+      const result = await this.blogService.deleteBlog(blog.id);
+      this.blogs = this.blogs.filter(b => b.id !== blog.id);
+
+    } catch(err) {
+      console.error(err);
+    }
+  }
 
   public search(value) {
     if (value) {

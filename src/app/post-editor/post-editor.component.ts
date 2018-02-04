@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
+import { PostService } from '../+core/api/post.service';
+import { BlogService } from '../+core/api/blog.service';
 
 import {
   LinkModalComponent,
@@ -23,11 +25,39 @@ export class PostEditorComponent implements OnInit {
   public selectionStart: number = 0;
   public selectionEnd: number = 0;
 
+  public blog: any;
+
   constructor(private modalService: NgbModal,
               public router: Router,
+              public route: ActivatedRoute,
+              public postService: PostService,
+              public blogService: BlogService,
               public localStorage: LocalStorageService,) { }
 
   ngOnInit() {
+     this.route.params.subscribe(async params => {
+       try {
+
+         if (params['postId'] !== 'new') {
+           const result = await this.postService.getPost(params['blogId'], params['postId'])  
+         } else {
+           const checkForBlog = await this.blogService.getBlog(params['blogId']);
+         }
+
+         
+       } catch(err) {
+         console.error(err);
+         this.router.navigate(['/home']);
+       }
+    });
+  }
+
+  async getBlog(id) {
+
+  }
+
+  async getPost(id) {
+
   }
 
   public bold(): void {
