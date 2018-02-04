@@ -19,6 +19,9 @@ export class PostPreviewComponent implements OnInit {
   @LocalStorage()
   public viewHTML;
 
+  @LocalStorage()
+  public viewHTMLTitle;
+
   constructor(public router: Router,) { }
 
   // TODO(dliszka): Issue token for preview.

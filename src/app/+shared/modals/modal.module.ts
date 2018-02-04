@@ -9,6 +9,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {
   LinkModalComponent,
   PictureModalComponent,
+  PublishModalComponent,
 } from './index'
 
 @NgModule({
@@ -23,14 +24,17 @@ import {
   entryComponents: [
     LinkModalComponent,
     PictureModalComponent,
+    PublishModalComponent,
   ],
   declarations: [
     LinkModalComponent,
     PictureModalComponent,
+    PublishModalComponent,
   ],
   exports: [
     LinkModalComponent,
     PictureModalComponent,
+    PublishModalComponent,
   ],
   providers: [],
 })

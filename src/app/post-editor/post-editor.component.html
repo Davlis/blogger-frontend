@@ -5,12 +5,12 @@
         <form>
             <div class="header">
               <div class="post-title">
-                <input class="form-control" type="text" placeholder="Post title" />
+                <input class="form-control" type="text" placeholder="Post title" 
+                       [(ngModel)]="title" [ngModelOptions]="{standalone: true}" />
               </div>
               <div class="options">
                 <div class="button-container">
-                  <button class="btn btn-outline-danger btn-round btn-sm" type="button">Publish</button>
-                  <button class="btn btn-outline-success btn-sm" type="button">Save</button>
+                  <button class="btn btn-outline-danger btn-round btn-sm" type="button" (click)="publish()" [disabled]="!title">Publish</button>
                   <button class="btn btn-outline-success btn-sm" type="button" (click)="gotoViewMode()">View mode</button>
                   <button class="btn btn-outline-success btn-sm" type="button">Close</button>
                 </div>

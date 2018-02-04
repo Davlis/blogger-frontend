@@ -90,10 +90,6 @@ export class BlogCreateComponent implements OnInit {
   }
 
   async updateBlog() {
-    if (!this.formGroup.valid) {
-      return;
-    }
-
     try {
       const result = await this.blogService.updateBlog(this.fetchedBlog.id, {
         data: this.formGroup.value,
@@ -107,11 +103,6 @@ export class BlogCreateComponent implements OnInit {
   }
 
   async createBlog() {
-
-    if (!this.formGroup.valid) {
-      return;
-    }
-
     try {
       const result = await this.blogService.createBlog({
         data: this.formGroup.value,

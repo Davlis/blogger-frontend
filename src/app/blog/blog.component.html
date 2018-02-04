@@ -30,8 +30,12 @@
   <div class="main">
     <div class="section">
       <div class="container">
-        <button type="button" class="btn btn-primary btn-round btn-sm" (click)="addPost()">Add post</button>
-        <h6>Posts</h6>
+        <div class="flex-container">
+          <span class="section-title"><h3 class="posts">Posts</h3></span>
+          <div class="admin-buttons" *ngIf="blog.isAuthor">
+            <button (click)="addPost()" type="button" class="btn btn-primary btn-round">Add post</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

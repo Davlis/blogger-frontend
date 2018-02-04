@@ -7,7 +7,8 @@ import { BlogService } from '../+core/api/blog.service';
 
 import {
   LinkModalComponent,
-  PictureModalComponent
+  PictureModalComponent,
+  PublishModalComponent,
 } from '../+shared';
 
 declare var $;
@@ -27,6 +28,8 @@ export class PostEditorComponent implements OnInit {
 
   public blog: any;
 
+  public title: string = '';
+
   constructor(private modalService: NgbModal,
               public router: Router,
               public route: ActivatedRoute,
@@ -41,7 +44,7 @@ export class PostEditorComponent implements OnInit {
          if (params['postId'] !== 'new') {
            const result = await this.getPost(params['blogId'], params['postId']);
          } else {
-           const checkForBlog = await this.getBlog(params['blogId']);
+           this.blog = await this.getBlog(params['blogId']);
          }
 
          
@@ -90,9 +93,21 @@ export class PostEditorComponent implements OnInit {
     });
   }
 
+  async publish() {
+    const modalRef = this.openModal('publish', { size: 'lg' });
+    modalRef.componentInstance.onClose.subscribe(event => {
+      console.log(event);
+    });
+  }
+
+  public update(): void {
+
+  }
+
   public gotoViewMode(): void {
 
     this.localStorage.store('viewHTML', this.textarea.nativeElement.value);
+    this.localStorage.store('viewHTMLTitle', this.title);
 
     open('post-preview', '_blank');
   }
@@ -126,6 +141,10 @@ export class PostEditorComponent implements OnInit {
 
     if (type === 'picture') {
       return this.modalService.open(PictureModalComponent, options);
+    }
+
+    if (type === 'publish') {
+      return this.modalService.open(PublishModalComponent, options);
     }
 
   }
