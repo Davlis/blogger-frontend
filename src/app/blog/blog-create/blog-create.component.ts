@@ -58,6 +58,11 @@ export class BlogCreateComponent implements OnInit {
   }
 
   async createBlog() {
+
+    if (!this.formGroup.valid) {
+      return;
+    }
+
     try {
       const result = await this.blogService.createBlog({
         data: this.formGroup.value,
