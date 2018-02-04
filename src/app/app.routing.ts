@@ -65,7 +65,7 @@ const routes: Routes = [
     component: PostEditorComponent,
   },
   {
-    path: 'post-view',
+    path: 'post-preview',
     component: PostPreviewComponent,
   },
   { 

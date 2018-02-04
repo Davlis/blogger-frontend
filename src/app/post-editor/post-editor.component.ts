@@ -64,7 +64,7 @@ export class PostEditorComponent implements OnInit {
 
     this.localStorage.store('viewHTML', this.textarea.nativeElement.value);
 
-    open('post-view', '_blank');
+    open('post-preview', '_blank');
   }
 
   public getCaretPos(oField) {
