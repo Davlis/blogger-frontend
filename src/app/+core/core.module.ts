@@ -5,6 +5,7 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { DataService } from './api/data.service';
 import { AuthService } from './services/auth.service';
 import { ApplicationUserService } from './services/application-user.service';
+import { SearchService } from './services/search.service';
 
 import { BlogService } from './api/blog.service';
 import { PostService } from './api/post.service';
@@ -19,6 +20,7 @@ import { UserService } from './api/user.service';
     DataService,
     AuthService,
     ApplicationUserService,
+    SearchService,
     UserService,
     BlogService,
     PostService,

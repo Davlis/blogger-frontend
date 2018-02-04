@@ -4,6 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { AuthService } from '../services/auth.service';
@@ -128,6 +129,21 @@ export class DataService {
         return response.json();
       }).catch(err => {
         return this.handleError(err);
+      });
+  }
+
+  getObservableDataQuery(endpoint: string, query: any) {
+    let url = `${env.api_url}/${endpoint}`;
+    url += this.getQuery(query);
+    this.headers.set('Authorization', this.auth.getAuthHeader());
+
+    return this.http
+      .get(url, { headers: this.headers })
+      .map(response => {
+        return response.json() as any[];
+      }).catch(err => {
+        this.handleError(err);
+        return Observable.of([]);
       });
   }
 
