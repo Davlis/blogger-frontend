@@ -145,7 +145,7 @@ export class ApplicationUserService {
   }
 
   logout() {
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['/landing']).then(() => {
       this.user = null;
       this.access = null;
       this.refresh = null;
