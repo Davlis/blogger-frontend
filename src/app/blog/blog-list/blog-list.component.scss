@@ -1,3 +1,5 @@
+@import "../../../styles/_variables.scss";
+
 .blog-picture {
   img {
     min-height: 40vh;
@@ -7,4 +9,32 @@
 
 .container {
   margin-top: 50px;  
+}
+
+.blog-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.blog {
+  margin-bottom: 25px;
+}
+
+.blog-options {
+  margin: 20px 0px 0px;
+}
+
+@media(max-width: 768px) {
+  .blog-header {
+    display: block;
+  }
+
+  .blog-title {
+    display: block;
+  }
+
+  .blog-options {
+    margin: 5px 0px 0px;
+  }
 }
