@@ -10,11 +10,11 @@ import {
 declare var $;
 
 @Component({
-  selector: 'app-post-view',
-  templateUrl: './post-view.component.html',
-  styleUrls: ['./post-view.component.scss']
+  selector: 'app-post-preview',
+  templateUrl: './post-preview.component.html',
+  styleUrls: ['./post-preview.component.scss']
 })
-export class PostViewComponent implements OnInit {
+export class PostPreviewComponent implements OnInit {
 
   @LocalStorage()
   public viewHTML;
@@ -23,7 +23,7 @@ export class PostViewComponent implements OnInit {
 
   ngOnInit() {
     if (this.viewHTML === undefined) {
-      console.error('Post view failure')
+      console.error('Post preview failure')
       this.router.navigate(['/home']);
     }
   }

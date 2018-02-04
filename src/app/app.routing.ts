@@ -13,7 +13,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BlogComponent } from './blog/blog.component';
 
 import { PostEditorComponent } from './post-editor/post-editor.component';
-import { PostViewComponent } from './post-view/post-view.component';
+import { PostPreviewComponent } from './post-preview/post-preview.component';
 
 import { AuthGuard } from './+core/guards/auth.guard';
 import { LoginGuard } from './+core/guards/login.guard';
@@ -66,7 +66,7 @@ const routes: Routes = [
   },
   {
     path: 'post-view',
-    component: PostViewComponent,
+    component: PostPreviewComponent,
   },
   { 
     path: '',
