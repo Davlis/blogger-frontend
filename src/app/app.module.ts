@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app.routing';
 
@@ -50,6 +51,7 @@ import { DevModule } from './dev/dev.module'
     HomeModule,
     DevModule,
     ModalModule,
+    FileUploadModule,
   ],
   declarations: [
     AppComponent,

@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   ]
 
   public gotoBlogCreate(): void {
-    
+    this.router.navigate(['/blog-create']); 
   }
 
   public gotoBlogList(): void {

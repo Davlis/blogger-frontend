@@ -4,8 +4,6 @@ import {FileUploadService} from '../../../+core/services/file-upload.service';
 import {UserService} from '../../../+core/api/user.service';
 import {NgbTabChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
-export const url = process.env.API_URL + '/user/upload';
-
 declare var $;
 
 @Component({

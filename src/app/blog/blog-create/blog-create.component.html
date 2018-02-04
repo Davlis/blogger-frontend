@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="main">
+    <div class="section">
+      <div class="container">
+        <form class="blog-form">
+          <div class="form-group">
+            <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Title" />
+          </div>
+          <div class="form-group">
+            <input [(ngModel)]="subtitle" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Subtitle" />
+          </div>
+          <div class="form-group">
+            <label class="btn btn-default btn-file" for="my-file-selector">
+                <input id="my-file-selector" type="file" style="display:none;"
+                      ng2FileSelect
+                      (change)="uploadPicture($event)"
+                      [uploader]="uploader">
+                Browse
+            </label>
+            <span class='label label-info' id="upload-file-info"></span>
+              <div>
+                  Queue progress:
+                  <div class="progress" style="">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group button-container">
+            <div class="left-side">
+              <button (click)="goHome()" type="submit" class="btn btn-default btn-round btn-lg">Never mind</button>
+            </div>
+            <div class="divider"></div>
+            <div class="right-side">
+              <button (click)="createBlog()" type="submit" class="btn btn-success btn-round btn-lg">Submit</button>
+            </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
