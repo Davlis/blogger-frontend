@@ -18,12 +18,15 @@
                 Browse
             </label>
             <span class='label label-info' id="upload-file-info"></span>
-              <div>
+              <div *ngIf="!uploadedFlag" class="slow-disappear">
                   Queue progress:
                   <div class="progress" style="">
                       <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
                   </div>
               </div>
+          </div>
+          <div *ngIf="uploadedFlag" class="form-group blog-photo">
+            <img class="miniature" [src]="photoUrl" />
           </div>
           <div class="form-group button-container">
             <div class="left-side">

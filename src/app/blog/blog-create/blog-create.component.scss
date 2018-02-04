@@ -11,3 +11,16 @@
 .divider {
   width: 50px;
 }
+
+.slow-disappear {
+  transition: 0.5s all;
+}
+
+.miniature {
+  max-width: 100%;
+}
+
+.blog-photo {
+  justify-content: center;
+  display: flex;
+}

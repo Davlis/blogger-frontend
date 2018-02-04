@@ -15,6 +15,8 @@ export class BlogCreateComponent implements OnInit {
 
   public uploader: any;
 
+  public uploadedFlag: boolean = false;
+
   public progress: number = 0;
 
   public title: string = '';
@@ -59,7 +61,9 @@ export class BlogCreateComponent implements OnInit {
       this.progress = 100;
 
       const result = JSON.parse(args[1]);
-      this.photoUrl = result.userUpload.uploadUrl;
+
+      this.finishUploading(result.userUpload.uploadUrl);
+
     } else {
       this.progress = 0;
       console.error('Server failure');
@@ -67,6 +71,8 @@ export class BlogCreateComponent implements OnInit {
   }
 
   public uploadPicture($event): void {
+
+    this.prepareUploading();
 
     const input = $($event.target),
         numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -79,6 +85,18 @@ export class BlogCreateComponent implements OnInit {
     };
 
     this.fileUploadService.upload();
+  }
+
+  public prepareUploading() {
+    this.uploadedFlag = false;
+    this.photoUrl = '';
+    this.progress = 0;
+  }
+
+  public finishUploading(photoUrl) {
+    setTimeout(() => this.uploadedFlag = true, 1000);
+    this.progress = 100;
+    this.photoUrl = photoUrl;
   }
 
   public calculateProgress(progress) {
