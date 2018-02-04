@@ -21,6 +21,8 @@ export class PostPreviewComponent implements OnInit {
 
   constructor(public router: Router,) { }
 
+  // TODO(dliszka): Issue token for preview.
+
   ngOnInit() {
     if (this.viewHTML === undefined) {
       console.error('Post preview failure')
