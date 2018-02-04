@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'app-blog-create',
+  templateUrl: './blog-create.component.html',
+  styleUrls: ['./blog-create.component.scss']
 })
-export class BlogComponent implements OnInit {
-  test : Date = new Date();
+export class BlogCreateComponent implements OnInit {
 
   public user: any = {
     firstName: 'Dawid',
@@ -30,7 +29,6 @@ export class BlogComponent implements OnInit {
   ngOnInit() {}
 
   public goToHome() {
-    // temp
     this.router.navigate(['/home']);
   }
 }

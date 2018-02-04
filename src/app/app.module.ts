@@ -7,22 +7,34 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app.routing';
 
-import { AppComponent } from './app.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
-import { LandingComponent } from './landing/landing.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './+shared/navbar/navbar.component';
 import { FooterComponent } from './+shared/footer/footer.component';
+
+import { AppComponent } from './app.component';
+
+import { LandingComponent } from './landing/landing.component';
+
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
+import { ProfileComponent } from './profile/profile.component';
+
 import { BlogComponent } from './blog/blog.component';
-import { HomeModule } from './home/home.module';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { BlogCreateComponent } from './blog/blog-create/blog-create.component';
 
 import { PostEditorComponent } from './post-editor/post-editor.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
 
+import { HomeModule } from './home/home.module';
+
 import { ModalModule } from './+shared/modals/modal.module';
 import { CoreModule } from './+core/core.module';
+
+
+
+
 
 import { DevModule } from './dev/dev.module'
 
@@ -49,6 +61,8 @@ import { DevModule } from './dev/dev.module'
     LoginComponent,
     ForgotPasswordComponent,
     BlogComponent,
+    BlogListComponent,
+    BlogCreateComponent,
     PostEditorComponent,
     PostPreviewComponent,
   ],

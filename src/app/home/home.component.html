@@ -7,17 +7,17 @@
         <div class="options">
           <div class="row">
             <div class="col-lg-6 col-xs-12">
-              <div class="card mb-3">
+              <div class="card mb-3" (click)="gotoBlogCreate()">
                 <img class="card-img-top" src="assets/img/white-book.jpg" alt="Card image cap">
                 <div class="card-block">
                   <h4 class="card-title">Create new blog</h4>
-                  <p class="card-text">Create new blog that will express yourself. Share your passion, reviews, experience to everyone.</p>
+                  <p class="card-text">Create new blog that will express you. Share your passion, reviews, experience to everyone.</p>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
               </div>
             </div>
             <div class="col-lg-6 col-xs-12">
-              <div class="card mb-3">
+              <div class="card mb-3" (click)="gotoBlogList()">
                 <img class="card-img-top" src="assets/img/open-book.jpg" alt="Card image cap">
                 <div class="card-block">
                   <h4 class="card-title">List of your blogs</h4>
@@ -28,20 +28,6 @@
             </div>
           </div>
         </div>
-
-
-<!--
-        <div class="blog-list">
-          <div *ngFor="let blog of blogs" class="blog" (click)="gotoBlog()">
-            <h3>
-              {{blog.title}}
-            </h3>
-            <div class="blog-picture">
-              <img [src]="blog.photoUrl"/>
-            </div>
-          </div>
-        </div>
--->
       </div>
     </div>
   </div>

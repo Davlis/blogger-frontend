@@ -2,18 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+  selector: 'app-blog-list',
+  templateUrl: './blog-list.component.html',
+  styleUrls: ['./blog-list.component.scss']
 })
-
-export class HomeComponent implements OnInit {
-
-  constructor(public router: Router) {
-
-  }
-
-  ngOnInit() {}
+export class BlogListComponent implements OnInit {
 
   public user: any = {
     firstName: 'Dawid',
@@ -43,12 +36,15 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  public gotoBlogCreate(): void {
-    
+  constructor(public router: Router) { }
+
+  ngOnInit() {}
+
+  public goToHome() {
+    this.router.navigate(['/home']);
   }
 
-  public gotoBlogList(): void {
-    this.router.navigate(['/blog-list']);
+  public gotoBlog(blog) {
+    this.router.navigate(['/blog', blog.id]);
   }
-
 }

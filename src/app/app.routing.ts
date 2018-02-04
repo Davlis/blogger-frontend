@@ -10,7 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 import { BlogComponent } from './blog/blog.component';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { BlogCreateComponent } from './blog/blog-create/blog-create.component';
 
 import { PostEditorComponent } from './post-editor/post-editor.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
@@ -23,6 +26,7 @@ import { DevComponent } from './dev/dev.component';
 const routes: Routes = [
   { 
     path: 'home',
+    canActivate: [AuthGuard],
     component: HomeComponent,
   },
   { 
@@ -48,8 +52,18 @@ const routes: Routes = [
     component: LandingComponent,
   },
   { 
-    path: 'blog',
+    path: 'blog/:id',
     component: BlogComponent,
+  },
+  {
+    path: 'blog-list',
+    canActivate: [AuthGuard],
+    component: BlogListComponent,
+  },
+  {
+    path: 'blog-create',
+    canActivate: [AuthGuard],
+    component: BlogCreateComponent,
   },
   { 
     path: 'nucleoicons',
@@ -70,7 +84,7 @@ const routes: Routes = [
   },
   { 
     path: '',
-    redirectTo: 'post-view',
+    redirectTo: 'blog-create',
     pathMatch: 'full',
   },
 ];
