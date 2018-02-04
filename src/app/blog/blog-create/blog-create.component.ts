@@ -2,6 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FileUploadService} from '../../+core/services/file-upload.service';
 import {BlogService} from '../../+core/api/blog.service';
+import {
+  FormGroup, 
+  FormBuilder, 
+  FormArray, 
+  FormControl, 
+  Validators
+} from '@angular/forms';
+
 
 declare var $;
 
@@ -19,13 +27,14 @@ export class BlogCreateComponent implements OnInit {
 
   public progress: number = 0;
 
-  public title: string = '';
-  public subtitle: string  = '';
-  public photoUrl: string = '';
+  public formGroup: FormGroup;
+
+  public photoUrl: string;
 
   constructor(public router: Router,
               public fileUploadService: FileUploadService,
-              public blogService: BlogService,) {
+              public blogService: BlogService,
+              public fb: FormBuilder,) {
     
     this.fileUploadService.setEndpoint('/user/upload');
     this.uploader = this.fileUploadService.uploader;
@@ -33,6 +42,15 @@ export class BlogCreateComponent implements OnInit {
 
   ngOnInit() {
     this.uploader.onCompleteItem = this.onComplete.bind(this);
+    this.formInit();
+  }
+
+  public formInit() {
+    this.formGroup = this.fb.group({
+      title: ['', Validators.required],
+      subtitle: ['', Validators.required],
+      photoUrl: [null]
+    });
   }
 
   public goHome() {
@@ -42,13 +60,11 @@ export class BlogCreateComponent implements OnInit {
   async createBlog() {
     try {
       const result = await this.blogService.createBlog({
-        data: {
-          title: this.title,
-          subtitle: this.subtitle,
-          photoUrl: this.photoUrl ? this.photoUrl : null,
-        }
+        data: this.formGroup.value,
       });
-      console.log(result);
+
+      this.router.navigate(['/blog', result.id]);
+
     } catch(err) {
       console.error(err);
     }
@@ -57,8 +73,6 @@ export class BlogCreateComponent implements OnInit {
   public onComplete(...args) {
 
     if (args[2] === 200) {
-
-      this.progress = 100;
 
       const result = JSON.parse(args[1]);
 
@@ -89,7 +103,8 @@ export class BlogCreateComponent implements OnInit {
 
   public prepareUploading() {
     this.uploadedFlag = false;
-    this.photoUrl = '';
+    this.photoUrl = null;
+    this.formGroup.get('photoUrl').setValue(this.photoUrl);
     this.progress = 0;
   }
 
@@ -97,6 +112,7 @@ export class BlogCreateComponent implements OnInit {
     setTimeout(() => this.uploadedFlag = true, 1000);
     this.progress = 100;
     this.photoUrl = photoUrl;
+    this.formGroup.get('photoUrl').setValue(this.photoUrl);
   }
 
   public calculateProgress(progress) {

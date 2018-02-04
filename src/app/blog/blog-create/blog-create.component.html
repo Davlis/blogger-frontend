@@ -2,16 +2,17 @@
   <div class="main">
     <div class="section">
       <div class="container">
-        <form class="blog-form">
+        <form class="blog-form" [formGroup]="formGroup">
           <div class="form-group">
-            <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Title" />
+            <input formControlName="title" class="form-control" type="text" placeholder="Title" />
           </div>
           <div class="form-group">
-            <input [(ngModel)]="subtitle" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Subtitle" />
+            <input formControlName="subtitle" class="form-control" type="text" placeholder="Subtitle" />
           </div>
           <div class="form-group">
             <label class="btn btn-default btn-file" for="my-file-selector">
-                <input id="my-file-selector" type="file" style="display:none;"
+                <input
+                      id="my-file-selector" type="file" style="display:none;"
                       ng2FileSelect
                       (change)="uploadPicture($event)"
                       [uploader]="uploader">
@@ -34,7 +35,7 @@
             </div>
             <div class="divider"></div>
             <div class="right-side">
-              <button (click)="createBlog()" type="submit" class="btn btn-success btn-round btn-lg">Submit</button>
+              <button (click)="createBlog()" type="submit" class="btn btn-success btn-round btn-lg" [class.disabled]="!formGroup.valid" [attr.disabled]="!formGroup.valid">Submit</button>
             </div>
             </div>
         </form>
