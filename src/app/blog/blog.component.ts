@@ -11,11 +11,6 @@ import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
 })
 export class BlogComponent implements OnInit {
 
-  public user: any = {
-    firstName: 'Dawid',
-    lastName: 'Liszka',
-  };
-
   public blog: any;
   public backgroundImg: any;
 

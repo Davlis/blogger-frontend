@@ -16,4 +16,14 @@ export class ReportService {
       }
     });
   }
+
+  public reportUser(id, body): Promise<any> {
+    return this.dataService.callHandler('post', 'report', {
+      data: {
+        type: 'user',
+        body,
+        id,
+      }
+    })
+  }
 }

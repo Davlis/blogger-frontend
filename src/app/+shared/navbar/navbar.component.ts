@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NAVBAR_ROUTES } from '../../config/navbar-routes.config';
 import { ApplicationUserService } from '../../+core/services/application-user.service';
+import { LocalStorage } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,9 @@ import { ApplicationUserService } from '../../+core/services/application-user.se
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  @LocalStorage()
+  public user;
 
   private toggleButton: any;
   private sidebarVisible: boolean;

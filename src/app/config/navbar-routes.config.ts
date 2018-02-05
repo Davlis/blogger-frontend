@@ -5,4 +5,5 @@ export const NAVBAR_ROUTES = [
   'post-view',
   'blog-list',
   'blog-create',
+  'profile',
 ]

@@ -30,4 +30,16 @@ export class UserService {
   public getUserFiles(): Promise<any> {
     return this.dataService.callHandler('get', 'user/upload');
   }
+
+  public getUser(id): Promise<any> {
+    return this.dataService.callHandler('get', `user/${id}`);
+  }
+
+  public updateUser(id, data): Promise<any> {
+    return this.dataService.callHandler('put', `user/${id}`, { data });
+  }
+
+  public getUserBlogs(id): Promise<any> {
+    return this.dataService.callHandler('get',  `user/${id}/blogs`);
+  }
 }

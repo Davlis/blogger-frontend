@@ -31,7 +31,7 @@
                     <a class="nav-link" href="#"><i class="nc-icon nc-compass-05" aria-hidden="true"></i>&nbsp;Discover</a>
                 </li>
                 <li *ngIf="isNavbarRoutes()" class="nav-item">
-                    <a class="nav-link" [routerLink]="['/user-profile']"><i class="nc-icon nc-single-02" aria-hidden="true"></i>&nbsp;Profile</a>
+                    <a class="nav-link" [routerLink]="['/profile', user.id]"><i class="nc-icon nc-single-02" aria-hidden="true"></i>&nbsp;Profile</a>
                 </li>
                 <li *ngIf="isNavbarRoutes()" class="nav-item">
                     <div ngbDropdown class="dropdown">
