@@ -1,14 +1,13 @@
 <div class="wrapper">
   <div class="main">
     <div class="section">
-      <div class="container">
+      <div class="container" *ngIf="post">
         <div class="title">
-          <h1>{{post?.title}}</h1>
+          <h1>{{post.title}}</h1>
         </div>
-        <div id="post-preview" [innerHTML]="post?.content"></div>
-
+        <div id="post-preview" [innerHTML]="post.content"></div>
         <div class="comment-section">
-          <app-comment-box></app-comment-box>
+          <app-comment-box [blogId]="post.blogId" [postId]="post.id"></app-comment-box>
         </div>
       </div>
     </div>
