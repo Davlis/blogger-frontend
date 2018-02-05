@@ -2,16 +2,18 @@
     <div class="comment-wrap">
         <div class="comment-head desktop">
             <div class="photo">
-                <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>   
+                <div *ngIf="!user.photoUrl" class="avatar" style="background-image: url('assets/img/avatar.png')"></div>
+                <div *ngIf="user.photoUrl" class="avatar" style="background-image: url(user.photoUrl)"></div> 
             </div>
-            <div class="username">Username</div>
+            <div class="username">{{user.firstName + ' ' + user.lastName}}</div>
         </div>
         <div class="comment-block">
             <div class="comment-head mobile">
                 <div class="photo">
-                    <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>   
+                    <div *ngIf="!user.photoUrl" class="avatar" style="background-image: url('assets/img/avatar.png')"></div>
+                    <div *ngIf="user.photoUrl" class="avatar" style="background-image: url(user.photoUrl)"></div> 
                 </div>
-                <div class="username">Username</div>
+                <div class="username">{{user.firstName + ' ' + user.lastName}}</div>
             </div>
             <form (ngSubmit)="addComment()">
                 <div class="form-group">
@@ -27,16 +29,18 @@
     <div *ngFor="let comment of comments" class="comment-wrap">
         <div class="comment-head desktop">
             <div class="photo">
-                <div class="avatar" style="background-image: url('assets/img/avatar.png')"></div>    
+                <div *ngIf="!comment.user.photoUrl" class="avatar" style="background-image: url('assets/img/avatar.png')"></div>
+                <div *ngIf="comment.user.photoUrl" class="avatar" style="background-image: url(comment.user.photoUrl)"></div> 
             </div>
-            <div class="username">Username</div>
+            <div class="username" [class.author]="isUserComment(comment)">{{comment.user.firstName + ' ' + comment.user.lastName}}</div>
         </div>
         <div class="comment-block">
             <div class="comment-head mobile">
                 <div class="photo">
-                    <div class="avatar" style="background-image: url('assets/img/avatar.png')"></div>    
+                    <div *ngIf="!comment.user.photoUrl" class="avatar" style="background-image: url('assets/img/avatar.png')"></div>
+                    <div *ngIf="comment.user.photoUrl" class="avatar" style="background-image: url(comment.user.photoUrl)"></div> 
                 </div>
-                <div class="username">Username</div>
+                <div class="username" [class.author]="isUserComment(comment)">{{comment.user.firstName + ' ' + comment.user.lastName}}</div>
             </div>
             <p class="comment-text">{{comment.content}}</p>
             <div class="bottom-comment">
@@ -44,6 +48,7 @@
                 <ul class="comment-actions">
                     <li class="complain">Complain</li>
                     <li class="reply">Reply</li>
+                    <li class="delete" *ngIf="canRemoveComment(comment)" (click)="remove(comment)">Delete</li>
                 </ul>
             </div>
         </div>

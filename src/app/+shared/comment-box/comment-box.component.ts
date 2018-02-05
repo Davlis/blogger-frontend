@@ -1,5 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {PostService} from '../../+core/api/post.service';
+import {BlogService} from '../../+core/api/blog.service';
+import {LocalStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-comment-box',
@@ -7,6 +9,9 @@ import {PostService} from '../../+core/api/post.service';
   styleUrls: ['./comment-box.component.scss'],
 })
 export class CommentBoxComponent implements OnInit {
+
+  @LocalStorage()
+  public user: any;
 
   @Input()
   public blogId: string;
@@ -18,10 +23,21 @@ export class CommentBoxComponent implements OnInit {
 
   public myComment: string = '';
 
-  constructor(public postService: PostService) { }
+  public isBlogAuthor: boolean = false;
 
-  public ngOnInit() {
-    this.getComments();
+  constructor(public postService: PostService,
+              public blogService: BlogService,) { }
+
+  async ngOnInit() {
+
+    try {
+      const blog = await this.blogService.getBlog(this.blogId);
+      this.isBlogAuthor = blog.isAuthor;
+
+      await this.getComments();
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   async getComments() {
@@ -39,6 +55,8 @@ export class CommentBoxComponent implements OnInit {
         content: this.myComment,
       }})
 
+      result.user = this.user;
+
       this.comments.splice(0, 0, result);
 
     } catch(err) {
@@ -46,6 +64,29 @@ export class CommentBoxComponent implements OnInit {
     }
   }
 
+  public isUserComment(comment) {
+    return comment.user.id === this.user.id;
+  }
+
+  public isAdmin() {
+    return this.user.role === 'admin';
+  }
+
   async updateComment() {
+  }
+
+  public canRemoveComment(comment) {
+    this.isUserComment(comment) || this.isAdmin || this.isBlogAuthor;
+  }
+
+  async remove(comment) {
+    try {
+      const result = await this.postService.removeComment(this.blogId, this.postId, comment.id)
+
+      this.comments = this.comments.filter(c => c.id !== comment.id);
+
+    } catch(err) {
+      console.error(err)
+    }
   }
 }
