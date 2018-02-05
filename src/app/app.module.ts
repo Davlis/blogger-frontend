@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app.routing';
 
 import { NavbarComponent } from './+shared/navbar/navbar.component';
 import { FooterComponent } from './+shared/footer/footer.component';
+import { CommentBoxComponent } from './+shared/comment-box/comment-box.component';
 
 import { AppComponent } from './app.component';
 
@@ -70,6 +71,7 @@ import { DevModule } from './dev/dev.module'
     PostEditorComponent,
     PostPreviewComponent,
     PostViewComponent,
+    CommentBoxComponent,
   ],
   providers: [
   ],
