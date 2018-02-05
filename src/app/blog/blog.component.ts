@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {BlogService} from '../+core/api/blog.service';
+import {PostService} from '../+core/api/post.service';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
 
 @Component({
@@ -18,16 +19,24 @@ export class BlogComponent implements OnInit {
   public blog: any;
   public backgroundImg: any;
 
+  public blogPosts: any[] = [];
+
   constructor(public router: Router,
               public route: ActivatedRoute,
               public blogService: BlogService,
+              public postService: PostService,
               private sanitizer: DomSanitizer,) { }
 
   ngOnInit() {
 
-    this.route.params.subscribe(params => {
-      this.getBlog(params['id'])
+    this.route.params.subscribe(async params => {
+      await this.getBlog(params['id'])
+      await this.getBlogPosts(params['id'])
     });
+  }
+
+  public gotoPost(post) {
+    this.router.navigate(['/post-view', this.blog.id, post.id]);
   }
 
   async getBlog(id) {
@@ -38,6 +47,31 @@ export class BlogComponent implements OnInit {
     } catch(err) {
       console.error(err);
     }
+  }
+
+  async getBlogPosts(id) {
+    try {
+      this.blogPosts = await this.postService.getPosts(id);
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  public editPost(post) {
+    this.router.navigate(['post-edit', this.blog.id, post.id])
+  }
+
+  async deletePost(post) {
+    try {
+      await this.postService.deletePost(this.blog.id, post.id);
+      this.blogPosts = this.blogPosts.filter(p => p.id !== post.id);
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  public subscribe(): void {
+
   }
 
   public addPost() {

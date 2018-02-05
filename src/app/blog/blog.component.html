@@ -35,6 +35,44 @@
           <div class="admin-buttons" *ngIf="blog.isAuthor">
             <button (click)="addPost()" type="button" class="btn btn-primary btn-round">Add post</button>
           </div>
+          <div class="viewer-buttons" *ngIf="!blog.isAuthor && !blog.isOwner">
+            <button (click)="subscribe()" type="button" class="btn btn-danger btn-round">Subscribe</button>            
+          </div>
+        </div>
+        <div class="row post-list">
+          <ng-container *ngFor="let post of blogPosts">
+            <ng-container *ngIf="blog.isAuthor">
+              <div class="button-container margin-bot col-lg-12">
+                <button type="button" class="btn btn-primary btn-round btn-sm" (click)="editPost(post)">Edit</button>
+                <button type="button" class="btn btn-danger btn-round btn-sm" (click)="deletePost(post)">Delete</button>
+              </div>
+            </ng-container>
+            <div *ngIf="!post.photoUrl" class="col-lg-12 margin-bot">
+              <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                <div class="card-block">
+                  <h3 class="card-title">{{post.title}}</h3>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a (click)="gotoPost(post)" class="btn btn-primary">Go to post</a>
+                </div>
+              </div>            
+            </div>
+            <div *ngIf="post.photoUrl" class="col-lg-12 margin-bot">
+               <div class="card card-with-image">
+                <img (click)="gotoPost(post)" class="card-img-top" [src]="post.photoUrl" alt="Card image cap">
+                <div class="card-block">
+                  <p class="card-text">{{post.title}}</p>
+                </div>
+              </div>             
+            </div>
+          </ng-container>
+          <ng-container *ngIf="blogPosts.length === 0">
+            <div class="col-lg-12" *ngIf="blog.isAuthor">
+              You don't have any posts, why don't you add something?
+            </div>
+            <div class="col-lg-12" *ngIf="!blog.isAuthor">
+              Blog donesn't have any post yet.
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

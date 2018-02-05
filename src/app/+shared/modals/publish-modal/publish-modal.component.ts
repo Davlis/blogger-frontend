@@ -12,8 +12,11 @@ declare var $;
 })
 export class PublishModalComponent implements OnInit {
 
-  public publishDate: any;
-  public tags: string[] = [];
+  @Input()
+  public publishDate;
+
+  @Input()
+  public tags;
 
   @Output()
   public onClose: EventEmitter<string> = new EventEmitter();
@@ -23,9 +26,47 @@ export class PublishModalComponent implements OnInit {
   }
 
   public ngOnInit() {
+
+    if (!this.publishDate) {
+      this.setDefaultPublishDate();
+    } else {
+      this.setDate(new Date(this.publishDate))
+    }
+
+    if (this.tags) {
+      this.tags = this.tags.join(' ');
+    }
   }
 
-  public emitClose(value): void {
+  public setDefaultPublishDate() {
+    const now = new Date();
+    this.setDate(now);
+  }
+
+  public setDate(date) {
+    this.publishDate = this.getFormatedDate(date);
+  }
+
+  public getFormatedDate(date) {
+    return {
+      year: date.getUTCFullYear(),
+      month: date.getUTCMonth()+1,
+      day: date.getUTCDate(),
+    };
+  }
+
+  public submit() {
+
+    console.log(this.tags);
+
+    this.emitClose({
+      publishDate: this.publishDate,
+      tags: this.tags.split(' ') || [],
+    });
+    this.activeModal.close('Close click')
+  }
+
+  public emitClose(value?): void {
     this.onClose.next(value);
   }
 }

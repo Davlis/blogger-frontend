@@ -6,3 +6,26 @@
 .posts {
   margin: 0 !important;
 }
+
+.post-list {
+  margin-top: 50px;
+}
+
+.card-title, .card-text {
+  color: white;
+  cursor: arrow;
+}
+
+.card-with-image {
+  .card-title, .card-text {
+    color: black;
+  }
+  img  {
+    max-height: 40vh;
+    cursor: pointer;
+  }
+}
+
+.margin-bot {
+  margin-bottom: 10px;
+}

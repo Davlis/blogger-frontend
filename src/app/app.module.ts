@@ -27,6 +27,7 @@ import { BlogCreateComponent } from './blog/blog-create/blog-create.component';
 
 import { PostEditorComponent } from './post-editor/post-editor.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
+import { PostViewComponent } from './post-view/post-view.component';
 
 import { HomeModule } from './home/home.module';
 
@@ -68,6 +69,7 @@ import { DevModule } from './dev/dev.module'
     BlogCreateComponent,
     PostEditorComponent,
     PostPreviewComponent,
+    PostViewComponent,
   ],
   providers: [
   ],

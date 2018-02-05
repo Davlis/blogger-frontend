@@ -4,6 +4,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
 import { PostService } from '../+core/api/post.service';
 import { BlogService } from '../+core/api/blog.service';
+import { DatePipe } from '@angular/common';
 
 import {
   LinkModalComponent,
@@ -23,12 +24,14 @@ export class PostEditorComponent implements OnInit {
   @ViewChild('textarea')
   public textarea;
 
+  public title: string = '';
+
   public selectionStart: number = 0;
   public selectionEnd: number = 0;
 
-  public blog: any;
-
-  public title: string = '';
+  public blogId: any;
+  public isEdit: boolean = false;
+  public post: any;
 
   constructor(private modalService: NgbModal,
               public router: Router,
@@ -41,18 +44,30 @@ export class PostEditorComponent implements OnInit {
      this.route.params.subscribe(async params => {
        try {
 
+         this.blogId = params['blogId'];
+
          if (params['postId'] !== 'new') {
-           const result = await this.getPost(params['blogId'], params['postId']);
+
+           const result = await this.getPost(this.blogId, params['postId']);
+
+           this.post = result;
+           this.isEdit = true;
+           this.populate(result);
+
          } else {
-           this.blog = await this.getBlog(params['blogId']);
+           const result = await this.getBlog(this.blogId);
          }
 
-         
        } catch(err) {
          console.error(err);
          this.router.navigate(['/home']);
        }
     });
+  }
+
+  public populate(post) {
+    this.title = post.title
+    this.textarea.nativeElement.value = post.content;
   }
 
   async getBlog(id) {
@@ -93,15 +108,61 @@ export class PostEditorComponent implements OnInit {
     });
   }
 
-  async publish() {
+  async publish(publishDate?, tags?) {
+
     const modalRef = this.openModal('publish', { size: 'lg' });
-    modalRef.componentInstance.onClose.subscribe(event => {
-      console.log(event);
+
+    if (publishDate) {
+      modalRef.componentInstance.publishDate = publishDate;
+    }
+
+    if (tags) {
+      modalRef.componentInstance.tags = tags;
+    }
+
+    modalRef.componentInstance.onClose.subscribe(async event => {
+
+      if (event) {
+
+        const data = {
+          title: this.title,
+          content: this.textarea.nativeElement.value,
+          tags: event.tags,
+          publishDate: this.getDate(event.publishDate),
+        }
+
+        if (this.isEdit) {
+          await this.postService.updatePost(this.blogId, this.post.id, { data });
+        } else {
+          this.post = await this.postService.createPost(this.blogId, { data });
+        }
+
+        this.router.navigate(['post-view', this.blogId, this.post.id]);
+      }
     });
   }
 
-  public update(): void {
+  public getDate(date) {
 
+    const year = date.year;
+
+    let month = date.month;
+
+    if (month <= 9) {
+      month = '0' + month;
+    }
+
+    let day = date.day;
+
+    if (day <= 9) {
+      day = '0'+day;
+    }
+
+    return `${year}-${month}-${day}`;
+  }
+
+  public update(): void {
+    this.publish(this.post.publishDate, this.post.tags);
   }
 
   public gotoViewMode(): void {
@@ -131,6 +192,10 @@ export class PostEditorComponent implements OnInit {
     el[0].selectionStart = el[0].selectionEnd = this.selectionStart + newText.length
 
     el.focus()
+  }
+
+  public isMinimalContent() {
+    return this.title && this.textarea.nativeElement.value;
   }
 
   private openModal(type, options?) {

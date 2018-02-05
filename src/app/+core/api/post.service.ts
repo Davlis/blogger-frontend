@@ -22,4 +22,8 @@ export class PostService {
   public updatePost(blogId, postId, data): Promise<any> {
     return this.dataService.callHandler('put', `blogs/${blogId}/posts/${postId}`, data);
   }
+
+  public deletePost(blogId, postId): Promise<any> {
+    return this.dataService.callHandler('delete', `blogs/${blogId}/posts/${postId}`);
+  }
 }

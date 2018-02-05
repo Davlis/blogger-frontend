@@ -10,7 +10,10 @@
               </div>
               <div class="options">
                 <div class="button-container">
-                  <button class="btn btn-outline-danger btn-round btn-sm" type="button" (click)="publish()" [disabled]="!title">Publish</button>
+                  <button *ngIf="!isEdit" class="btn btn-outline-danger btn-round btn-sm" type="button" (click)="publish()" [disabled]="!isMinimalContent()">Publish</button>
+
+                  <button *ngIf="isEdit" class="btn btn-outline-danger btn-round btn-sm" type="button" (click)="update()" [disabled]="!isMinimalContent()">Save changes</button>
+
                   <button class="btn btn-outline-success btn-sm" type="button" (click)="gotoViewMode()">View mode</button>
                   <button class="btn btn-outline-success btn-sm" type="button">Close</button>
                 </div>

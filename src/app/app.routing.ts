@@ -17,6 +17,7 @@ import { BlogCreateComponent } from './blog/blog-create/blog-create.component';
 
 import { PostEditorComponent } from './post-editor/post-editor.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
+import { PostViewComponent } from './post-view/post-view.component';
 
 import { AuthGuard } from './+core/guards/auth.guard';
 import { LoginGuard } from './+core/guards/login.guard';
@@ -81,6 +82,11 @@ const routes: Routes = [
   {
     path: 'post-preview',
     component: PostPreviewComponent,
+  },
+  {
+    path: 'post-view/:blogId/:postId',
+    canActivate: [AuthGuard],
+    component: PostViewComponent,
   },
   { 
     path: '',
