@@ -42,6 +42,10 @@ form {
     .options {
       .button-container {
         display: inline-block;
+        button {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
       }
     }
   }
@@ -60,6 +64,11 @@ form {
         margin-top: 25px;
         .button-container {
           display: flex;
+          justify-content: space-between;
+          button {
+            margin-right: 0px;
+            margin-left: 0px;
+          }
         }
       }
     }
