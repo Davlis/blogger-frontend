@@ -10,6 +10,7 @@ import {
   LinkModalComponent,
   PictureModalComponent,
   PublishModalComponent,
+  ReportModalComponent,
 } from './index'
 
 @NgModule({
@@ -25,16 +26,19 @@ import {
     LinkModalComponent,
     PictureModalComponent,
     PublishModalComponent,
+    ReportModalComponent,
   ],
   declarations: [
     LinkModalComponent,
     PictureModalComponent,
     PublishModalComponent,
+    ReportModalComponent,
   ],
   exports: [
     LinkModalComponent,
     PictureModalComponent,
     PublishModalComponent,
+    ReportModalComponent,
   ],
   providers: [],
 })

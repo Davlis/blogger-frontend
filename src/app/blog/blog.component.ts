@@ -62,6 +62,11 @@ export class BlogComponent implements OnInit {
   }
 
   async deletePost(post) {
+
+    if (!confirm('Are you sure to remove this post?')) {
+      return;
+    }
+
     try {
       await this.postService.deletePost(this.blog.id, post.id);
       this.blogPosts = this.blogPosts.filter(p => p.id !== post.id);

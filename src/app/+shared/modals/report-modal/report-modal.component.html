@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h5 class="modal-title text-center">Report issue</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input class="form-control" type="text" placeholder="Say why you want to report"  [(ngModel)]="content" /> 
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="left-side">
+    <button type="button" class="btn btn-default btn-link" (click)="emitClose(); activeModal.close('Close click')">Never mind</button>
+  </div>
+  <div class="divider"></div>
+  <div class="right-side">
+    <button [disabled]="!content"
+            type="button" class="btn btn-danger btn-link" 
+            (click)="emitClose(content); activeModal.close('Close click')">OK</button>
+  </div>
+</div>

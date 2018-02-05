@@ -10,6 +10,7 @@ import { SearchService } from './services/search.service';
 import { BlogService } from './api/blog.service';
 import { PostService } from './api/post.service';
 import { UserService } from './api/user.service';
+import { ReportService } from './api/report.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { UserService } from './api/user.service';
     UserService,
     BlogService,
     PostService,
+    ReportService,
   ],
   exports: [
   ]

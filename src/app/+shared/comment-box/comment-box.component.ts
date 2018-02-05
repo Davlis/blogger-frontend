@@ -1,7 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {PostService} from '../../+core/api/post.service';
 import {BlogService} from '../../+core/api/blog.service';
+import {ReportService} from '../../+core/api/report.service';
 import {LocalStorage} from 'ngx-webstorage';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {
+  ReportModalComponent,
+} from '../';
 
 @Component({
   selector: 'app-comment-box',
@@ -19,14 +24,17 @@ export class CommentBoxComponent implements OnInit {
   @Input()
   public postId: string;
 
-  public comments: any[];
+  @ViewChild('comment')
+  public comment;
 
-  public myComment: string = '';
+  public comments: any[];
 
   public isBlogAuthor: boolean = false;
 
   constructor(public postService: PostService,
-              public blogService: BlogService,) { }
+              public blogService: BlogService,
+              public reportService: ReportService,
+              private modalService: NgbModal,) { }
 
   async ngOnInit() {
 
@@ -52,12 +60,13 @@ export class CommentBoxComponent implements OnInit {
   async addComment() {
     try {
       const result = await this.postService.addComment(this.blogId, this.postId, {data: {
-        content: this.myComment,
+        content: this.comment.nativeElement.value,
       }})
 
       result.user = this.user;
 
       this.comments.splice(0, 0, result);
+      this.comment.nativeElement.value = '';
 
     } catch(err) {
       console.error(err);
@@ -76,10 +85,15 @@ export class CommentBoxComponent implements OnInit {
   }
 
   public canRemoveComment(comment) {
-    this.isUserComment(comment) || this.isAdmin || this.isBlogAuthor;
+    return this.isUserComment(comment) || this.isAdmin() || this.isBlogAuthor;
   }
 
   async remove(comment) {
+
+    if (!confirm('Are you sure to remove this comment?')) {
+      return;
+    }
+
     try {
       const result = await this.postService.removeComment(this.blogId, this.postId, comment.id)
 
@@ -87,6 +101,31 @@ export class CommentBoxComponent implements OnInit {
 
     } catch(err) {
       console.error(err)
+    }
+  }
+
+  public reply(comment): void {
+    this.comment.nativeElement.value += '@' + this.retrieveNicknameFromComment(comment);
+  }
+
+  public retrieveNicknameFromComment(comment): string {
+    return comment.user.firstName + comment.user.lastName;
+  }
+
+  public complain(comment): void {
+    const modalRef = this.openModal('report');
+    modalRef.componentInstance.onClose.subscribe(async event => {
+      if (event) {
+        const result = await this.reportService.reportPostComment(comment.id, event);
+        // populate alert that complain was succesfully made
+      }
+    });
+  }
+
+  private openModal(type, options?) {
+
+    if (type === 'report') {
+      return this.modalService.open(ReportModalComponent, options);
     }
   }
 }
