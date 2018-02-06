@@ -46,7 +46,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   { 
-    path: 'forgot-password', 
+    path: 'forgot-password',
     component: ForgotPasswordComponent,
   },
   { 
@@ -55,6 +55,7 @@ const routes: Routes = [
   },
   { 
     path: 'blog/:id',
+    canActivate: [AuthGuard],
     component: BlogComponent,
   },
   {
@@ -91,7 +92,7 @@ const routes: Routes = [
   },
   { 
     path: '',
-    redirectTo: 'blog-create',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 ];

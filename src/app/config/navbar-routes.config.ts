@@ -6,4 +6,5 @@ export const NAVBAR_ROUTES = [
   'blog-list',
   'blog-create',
   'profile',
+  'blog',
 ]

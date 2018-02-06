@@ -21,10 +21,12 @@
           </div>
       </div>
       <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>
-      <h6 class=" category-absolute ml-auto mr-auto">Designed and coded by
-          <a href="https://www.creative-tim.com" target="_blank">
-              <img src="assets/img/creative-tim-white-slim2.png" class="creative-tim-logo">
-          </a>
+      <h6 class=" category-absolute ml-auto mr-auto">Designed by
+        <a [routerLink]="['/profile', blog.user.id]">
+          <img *ngIf="blog.user.photoUrl" [src]="blog.user.photoUrl" class="logo"/>
+          <img *ngIf="!blog.user.photoUrl" src="assets/img/avatar.png" class="logo"/>
+        </a>
+        <span>{{blog.user.firstName + ' ' + blog.user.lastName}}</span>
       </h6>
   </div>
   <div class="main">
