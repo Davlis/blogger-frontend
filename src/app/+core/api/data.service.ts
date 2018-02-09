@@ -9,9 +9,7 @@ import 'rxjs/add/observable/of';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { AuthService } from '../services/auth.service';
 
-export const env = {
-  api_url: 'http://localhost:3000',
-}
+import { environment as env } from '../../../environments/environment';
 
 export const methodNames = [
   'get',
