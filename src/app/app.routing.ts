@@ -47,10 +47,12 @@ const routes: Routes = [
   },
   { 
     path: 'forgot-password',
+    canActivate: [LoginGuard],
     component: ForgotPasswordComponent,
   },
   { 
     path: 'landing',
+    canActivate: [LoginGuard],
     component: LandingComponent,
   },
   { 

@@ -10,7 +10,6 @@ import {
   Validators
 } from '@angular/forms';
 
-
 declare var $;
 
 @Component({
