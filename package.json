@@ -1,7 +1,22 @@
 {
-  "name": "pk2-angular",
-  "version": "1.0.0",
-  "license": "MIT",
+  "name": "blogspot",
+  "version": "0.0.1",
+  "description": "Create your own blog using blogspot.",
+  "author": "Dawid Liszka",
+  "license": "ISC",
+  "keywords": [
+    "blogspot",
+    "blog",
+    "blogger"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Davlis/blogger-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Davlis/blogger-frontend/issues"
+  },
+  "homepage": "https://github.com/Davlis/blogger-frontend#readme",
   "scripts": {
     "ng": "ng",
     "start": "webpack-dev-server --port=4200",
