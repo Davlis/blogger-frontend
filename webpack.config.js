@@ -458,11 +458,10 @@ module.exports = {
       "sourceMap": true,
       "filename": "scripts.bundle.js",
       "scripts": [
-        "/home/dliszka/PAI/blogger-frontend/node_modules/jquery/dist/jquery.slim.min.js",
-        "/home/dliszka/PAI/blogger-frontend/node_modules/popper.js/dist/umd/popper.js",
-        "/home/dliszka/PAI/blogger-frontend/node_modules/bootstrap/dist/js/bootstrap.min.js"
-      ],
-      "basePath": "/home/dliszka/PAI/blogger-frontend"
+        "./node_modules/jquery/dist/jquery.slim.min.js",
+        "./node_modules/popper.js/dist/umd/popper.js",
+        "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ]
     }),
     new CopyWebpackPlugin([
       {

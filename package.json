@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Davlis/blogger-frontend#readme",
   "scripts": {
     "ng": "ng",
-    "start": "webpack-dev-server --port=4200",
+    "start": "webpack-dev-server --port=4200 --host 0.0.0.0",
     "build": "webpack",
     "test": "karma start ./karma.conf.js",
     "lint": "ng lint",
@@ -69,7 +69,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "^5.7.0",
-    "typescript": "^2.4.2",
+    "typescript": "~2.4.2",
     "webpack-dev-server": "~2.11.0",
     "@ngtools/webpack": "1.9.6",
     "webpack": "~3.10.0",
