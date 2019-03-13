@@ -4,9 +4,7 @@ services:
   frontend:
     build: .
     ports:
-      - 4200:4200
-    volumes:
-      - .:/usr/src/app/
+      - 4200:80
     env_file:
       - .env.docker
 networks:

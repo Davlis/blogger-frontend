@@ -1,13 +1,6 @@
-FROM node:carbon-alpine
+FROM nginx:alpine
 
-WORKDIR /usr/src/app
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE $PORT
-
-RUN npm run start
+WORKDIR /usr/share/nginx/html
+COPY dist/ .
