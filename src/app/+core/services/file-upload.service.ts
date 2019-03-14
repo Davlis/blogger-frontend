@@ -28,7 +28,7 @@ export class FileUploadService {
 
   private initUploader(): void {
     if (!this.uploader) {
-      this.uploader = new FileUploader({url: environment.api_url});
+      this.uploader = new FileUploader({url: environment.API_URL});
       this.uploader.onAfterAddingFile = this.onAfterAddingFile;
       this.uploader.onCompleteItem = this.onCompleteItem;
       this.uploader.onErrorItem = this.onErrorItem;
@@ -45,7 +45,7 @@ export class FileUploadService {
   }
 
   setEndpoint(endpoint: string): void {
-    this.uploader.setOptions({url: environment.api_url + endpoint});
+    this.uploader.setOptions({url: environment.API_URL + endpoint});
   }
 
   setOnCompleteAll(func) {

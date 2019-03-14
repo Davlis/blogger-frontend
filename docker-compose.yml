@@ -7,6 +7,9 @@ services:
       - 4200:80
     env_file:
       - .env.docker
+    networks:
+      - blogger_default
+      - default
 networks:
   blogger_default:
     external: true
