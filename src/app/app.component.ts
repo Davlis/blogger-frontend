@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     private document: any, 
     private element : ElementRef, 
     public location: Location) {
+      console.log(':))')
   }
 
   ngOnInit() {
