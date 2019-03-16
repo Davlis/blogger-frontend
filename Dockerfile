@@ -2,9 +2,9 @@
 FROM node:carbon-alpine as builder
 
 WORKDIR /app
-COPY package.json package-lock.json  /app/
+COPY package.json /app/
 RUN cd /app && npm install
-COPY .  /app
+COPY . /app
 
 RUN cd /app && npm run build:prod
 

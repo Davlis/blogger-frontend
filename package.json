@@ -24,6 +24,7 @@
     "build": "webpack --config webpack.dev.config.js",
     "build:prod": "webpack",
     "start": "webpack-dev-server --config webpack.dev.config.js --port=4200 --host 0.0.0.0",
+    "start:prod": "webpack-dev-server --port=4200 --host 0.0.0.0",
     "test": "karma start ./karma.conf.js",
     "e2e": "protractor ./protractor.conf.js"
   },
