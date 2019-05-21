@@ -57,6 +57,8 @@ export class DataService {
 
       let url = `${env.API_URL}/${endpoint}`;
 
+      console.log(url)
+
       if (options && options.query) {
         url += this.getQuery(options.query);
       }
