@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/fabio-mangione.jpg');">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('assets/img/fabio-mangione.jpg');">
         <div class="filter"></div>
     </div>
     <div class="section profile-content" *ngIf="user">
@@ -9,7 +9,7 @@
 
                     <img *ngIf="user.photoUrl" [src]="user.photoUrl" alt="Circle Image" class="img-circle img-no-padding img-responsive"/>
 
-                    <img *ngIf="!user.photoUrl" src="../assets/img/avatar.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                    <img *ngIf="!user.photoUrl" src="assets/img/avatar.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                 </div>
                 <div class="name">
                     <h4 class="title">{{user.firstName}} {{user.lastName}}<br /></h4>
@@ -59,7 +59,7 @@
                                                             <img *ngIf="userBlog.blog.photoUrl"
                                                             [src]="userBlog.blog.photoUrl" alt="Circle Image" class="img-circle img-no-padding img-responsive"/>
 
-                                                            <img *ngIf="!userBlog.blog.photoUrl" src="../assets/img/blog_1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                            <img *ngIf="!userBlog.blog.photoUrl" src="assets/img/blog_1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                         </div>
                                                         <div class="col-md-7 col-sm-4 ml-auto">
                                                             <h6>{{userBlog.blog.title}}<br/><small>{{userBlog.blog.subtitle}}</small></h6>
