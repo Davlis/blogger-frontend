@@ -145,13 +145,15 @@ export class ApplicationUserService {
   }
 
   logout() {
+    this.user = null;
+    this.access = null;
+    this.refresh = null;
+    this.localStorage.clear('user');
+    this.localStorage.clear('access');
+    this.localStorage.clear('refresh');
+
     this.router.navigate(['/landing']).then(() => {
-      this.user = null;
-      this.access = null;
-      this.refresh = null;
-      this.localStorage.clear('user');
-      this.localStorage.clear('access');
-      this.localStorage.clear('refresh');
+      //
     });
   }
 }

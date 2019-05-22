@@ -56,9 +56,6 @@ export class PublishModalComponent implements OnInit {
   }
 
   public submit() {
-
-    console.log(this.tags);
-
     this.emitClose({
       publishDate: this.publishDate,
       tags: this.tags.split(' ') || [],
