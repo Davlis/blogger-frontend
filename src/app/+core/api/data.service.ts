@@ -55,7 +55,7 @@ export class DataService {
       }
 
 
-      let url = `${env.api_url}/${endpoint}`;
+      let url = `${env.API_URL}/${endpoint}`;
 
       if (options && options.query) {
         url += this.getQuery(options.query);
@@ -131,7 +131,7 @@ export class DataService {
   }
 
   getObservableDataQuery(endpoint: string, query: any) {
-    let url = `${env.api_url}/${endpoint}`;
+    let url = `${env.API_URL}/${endpoint}`;
     url += this.getQuery(query);
     this.headers.set('Authorization', this.auth.getAuthHeader());
 

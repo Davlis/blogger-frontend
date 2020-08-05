@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: frontend-dev
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/usr/src/app/
+    networks:
+      - blogger_default
+      - default
+networks:
+  blogger_default:
+    external: true

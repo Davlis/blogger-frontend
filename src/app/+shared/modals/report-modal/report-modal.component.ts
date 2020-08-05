@@ -16,7 +16,7 @@ export class ReportModalComponent {
   constructor(public activeModal: NgbActiveModal) {
   }
 
-  emitClose(value) {
+  emitClose(value?) {
     this.onClose.next(value);
   }
 }
